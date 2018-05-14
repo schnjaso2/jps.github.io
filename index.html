@@ -88,7 +88,11 @@ var map = new mapboxgl.Map({
         speed: 0.8,
         pitch: 0
 });
-var chapters = {
+var title = document.getElementById('chapters-title');
+var description = document.getElementById('chapters-description');
+
+var chapters = [{
+
     'welcome': {
         bearing: -0,
         center: [-108.866174, 49.272291],
@@ -99,7 +103,7 @@ var chapters = {
     'section1': {
     'title':' <a href= 'http://www.bryantlakebowl.com/'>'Bryant-Lake Bowl'</a>',
     'description' = 'An Uptown Minneapolis Institution',
-    'position' = 'Theater Technician',
+
 
     'camera':  {
         bearing: 0,
@@ -151,6 +155,7 @@ var chapters = {
         pitch: 0
     },
 };
+]
 // On every scroll event, check which element is on screen
 window.onscroll = function() {
     var chapterNames = Object.keys(chapters);
