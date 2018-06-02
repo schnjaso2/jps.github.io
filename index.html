@@ -183,6 +183,20 @@ section:last-child {
 
 </div>
 <script>
+<div id='menu'>
+    <input id='Jason' type='radio' name='rtoggle' value='Jason' checked='checked'>
+    <label for='Jason'>Jason</label>
+    <input id='streets' type='radio' name='rtoggle' value='streets'>
+    <label for='streets'>streets</label>
+    <input id='bright' type='radio' name='rtoggle' value='bright'>
+    <label for='bright'>bright</label>
+    <input id='light' type='radio' name='rtoggle' value='light'>
+    <label for='light'>light</label>
+    <input id='dark' type='radio' name='rtoggle' value='dark'>
+    <label for='dark'>dark</label>
+    <input id='satellite' type='radio' name='rtoggle' value='satellite'>
+    <label for='satellite'>satellite</label>
+</div>
 mapboxgl.accessToken = 'pk.eyJ1IjoicHJtbnRvYnNydnIiLCJhIjoiY2l6a3F1eXAyMDBkeTJ3bHJ3a2xwYmRjYiJ9.KLHXMXS1rjUhSBldIVJ9eg';
 var map = new mapboxgl.Map({
     container: 'map',
@@ -193,7 +207,17 @@ var map = new mapboxgl.Map({
         speed: 0.8,
         pitch: 33
 });
+var layerList = document.getElementById('menu');
+var inputs = layerList.getElementsByTagName('input');
 
+function switchLayer(layer) {
+    var layerId = layer.target.id;
+    map.setStyle('mapbox://styles/mapbox/' + layerId + '-v9');
+}
+
+for (var i = 0; i < inputs.length; i++) {
+    inputs[i].onclick = switchLayer;
+}
 map.addControl(new MapboxGeocoder({
     accessToken: mapboxgl.accessToken
 }));
@@ -203,6 +227,7 @@ map.addControl(new mapboxgl.GeolocateControl({
     },
     trackUserLocation: true
 }));
+
 var title = document.getElementById('chapters-title');
 var description = document.getElementById('chapters-description');
 
