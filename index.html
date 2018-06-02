@@ -183,20 +183,7 @@ section:last-child {
 
 </div>
 <script>
-<div id='menu'>
-    <input id='cjgx3scyo000n2so21epjlssw' type='radio' name='rtoggle' value='cjgx3scyo000n2so21epjlssw' checked='checked'>
-    <label for='cjgx3scyo000n2so21epjlssw'>Jason</label>
-    <input id='cjhwuvdco1ur62rlpuof9j50n' type='radio' name='rtoggle' value='cjhwuvdco1ur62rlpuof9j50n'>
-    <label for='cjhwuvdco1ur62rlpuof9j50n'>SatStreets</label>
-    <input id='cjhwuo46t07922snx7ccsgd3i' type='radio' name='rtoggle' value='cjhwuo46t07922snx7ccsgd3i'>
-    <label for='cjhwuo46t07922snx7ccsgd3i'>LeShine</label>
-    <input id='cj819o0tn8gmr2rn4v0xzwc8j' type='radio' name='rtoggle' value='cj819o0tn8gmr2rn4v0xzwc8j'>
-    <label for='cj819o0tn8gmr2rn4v0xzwc8j'>Desert</label>
-    //<input id='dark' type='radio' name='rtoggle' value='dark'>
-    //<label for='dark'>dark</label>
-  //  <input id='satellite' type='radio' name='rtoggle' value='satellite'>
-  //  <label for='satellite'>satellite</label>
-</div>
+
 mapboxgl.accessToken = 'pk.eyJ1IjoicHJtbnRvYnNydnIiLCJhIjoiY2l6a3F1eXAyMDBkeTJ3bHJ3a2xwYmRjYiJ9.KLHXMXS1rjUhSBldIVJ9eg';
 var map = new mapboxgl.Map({
     container: 'map',
@@ -207,18 +194,7 @@ var map = new mapboxgl.Map({
         speed: 0.8,
         pitch: 33
 });
-var layerList = document.getElementById('menu');
-var inputs = layerList.getElementsByTagName('input');
 
-function switchLayer(layer) {
-    var layerId = layer.target.id;
-    map.setStyle('mapbox://styles/prmntobsrvr/' + layerId)
-  //  mapbox://styles/prmntobsrvr/cj819o0tn8gmr2rn4v0xzwc8j;
-}
-//mapbox://styles/prmntobsrvr/cjgx3scyo000n2so21epjlssw
-for (var i = 0; i < inputs.length; i++) {
-    inputs[i].onclick = switchLayer;
-}
 map.addControl(new MapboxGeocoder({
     accessToken: mapboxgl.accessToken
 }));
