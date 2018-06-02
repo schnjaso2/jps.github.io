@@ -193,14 +193,15 @@ var map = new mapboxgl.Map({
         speed: 0.8,
         pitch: 33
 });
+
+map.addControl(new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken
+}));
 map.addControl(new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true
     },
     trackUserLocation: true
-}));
-map.addControl(new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken
 }));
 var title = document.getElementById('chapters-title');
 var description = document.getElementById('chapters-description');
