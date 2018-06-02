@@ -197,9 +197,24 @@ var map = new mapboxgl.Map({
         pitch: 33
 });
 
-map.addControl(new MapboxGeocoder({
+var geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken
-}));
+});
+map.addControl(geocoder);
+
+map.on('load', updateGeocoderProximity); // set proximity on map load
+map.on('moveend', updateGeocoderProximity); // and then update proximity each time the map moves
+
+function updateGeocoderProximity() {
+    // proximity is designed for local scale, if the user is looking at the whole world,
+    // it doesn't make sense to factor in the arbitrary centre of the map
+    if (map.getZoom() > 9) {
+        var center = map.getCenter().wrap(); // ensures the longitude falls within -180 to 180 as the Geocoding API doesn't accept values outside this range
+        geocoder.setProximity({ longitude: center.lng, latitude: center.lat });
+    } else {
+        geocoder.setProximity(null);
+    }
+}
 map.addControl(new mapboxgl.GeolocateControl({
     positionOptions: {
         enableHighAccuracy: true
