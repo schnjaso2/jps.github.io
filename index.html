@@ -204,7 +204,21 @@ map.addControl(geocoder);
 
 map.on('load', updateGeocoderProximity); // set proximity on map load
 map.on('moveend', updateGeocoderProximity); // and then update proximity each time the map moves
+map.on('load', function() {
 
+    map.addLayer({
+        'id': 'wms-test-layer',
+        'type': 'raster',
+        'source': {
+            'type': 'raster',
+            'tiles': [
+                'https://geodata.state.nj.us/imagerywms/Natural2015?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&width=256&height=256&layers=Natural2015'
+            ],
+            'tileSize': 256
+        },
+        'paint': {}
+    }, 'aeroway-taxiway');
+});
 function updateGeocoderProximity() {
     // proximity is designed for local scale, if the user is looking at the whole world,
     // it doesn't make sense to factor in the arbitrary centre of the map
