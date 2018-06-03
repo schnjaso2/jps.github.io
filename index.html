@@ -196,14 +196,6 @@ var map = new mapboxgl.Map({
         speed: 0.8,
         pitch: 33
 });
-
-var geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken
-});
-map.addControl(geocoder);
-
-map.on('load', updateGeocoderProximity); // set proximity on map load
-map.on('moveend', updateGeocoderProximity); // and then update proximity each time the map moves
 map.on('load', function() {
 
     map.addLayer({
@@ -219,6 +211,14 @@ map.on('load', function() {
         'paint': {}
     }, 'aeroway-taxiway');
 });
+var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken
+});
+map.addControl(geocoder);
+
+map.on('load', updateGeocoderProximity); // set proximity on map load
+map.on('moveend', updateGeocoderProximity); // and then update proximity each time the map moves
+
 function updateGeocoderProximity() {
     // proximity is designed for local scale, if the user is looking at the whole world,
     // it doesn't make sense to factor in the arbitrary centre of the map
